@@ -34,8 +34,15 @@ async function run() {
 
     app.post('/coffees', async (req, res) => {
       const newCoffee = req.body;
-    //   console.log('Data in the Server: ', newCoffee);
+      //   console.log('Data in the Server: ', newCoffee);
       const result = await CoffeeCollection.insertOne(newCoffee);
+      res.send(result);
+    });
+
+    app.get('/coffees', async (req, res) => {
+      const cursor = CoffeeCollection.find();
+      const result = await cursor.toArray();
+      //   console.log(result);
       res.send(result);
     });
 
